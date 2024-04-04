@@ -1,12 +1,12 @@
 {
-  "name": "nuxt-app",
+  "name": "synapse",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host --port 3000",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "preview": "nuxt preview --port 3001 --preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
