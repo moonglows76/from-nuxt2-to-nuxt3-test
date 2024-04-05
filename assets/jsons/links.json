@@ -1,0 +1,152 @@
+[
+  {
+    "title": "ホーム",
+    "titleEn": "Home",
+    "path": "/",
+    "isDisableOnHeader": true,
+    "isDisableOnFooter": true
+  },
+  {
+    "title": "シナプスについて",
+    "titleEn": "About Us",
+    "path": "/about/",
+    "isOnOtherLink": true,
+    "picture": "/images/common/other_links_about.jpg",
+    "children": [
+      {
+        "title": "シナプスの経営理念",
+        "thumbnail": "/images/about/picture_1.jpg",
+        "path": "/philosophy/",
+        "description": "「ICTで、もっと魅力的な鹿児島を」――。シナプスの鹿児島への思いとともに、シナプスが掲げる「シナプスミッション」「シナプスビジョン」「シナプスバリュー」をご紹介します。"
+      },
+      {
+        "title": "シナプスの特長",
+        "thumbnail": "/images/about/picture_2.jpg",
+        "path": "/feature/",
+        "description": "シナプスは南九州初のインターネットサービスプロバイダです。長年、地域密着型のプロバイダとして提供してきたサービスを支える技術、万全のサポート体制など、私たちの強みをお伝えします。"
+      },
+      {
+        "title": "数字で見るシナプス",
+        "thumbnail": "/images/about/picture_3.jpg",
+        "path": "/statistics/",
+        "description": "シナプスをより詳しく知っていただくために、私たちの実像を数字に代えて、分かりやすくご覧いただきます。"
+      },
+      {
+        "title": "サービス紹介",
+        "thumbnail": "/images/about/picture_4.jpg",
+        "path": "/service/",
+        "description": "シナプスが展開するサービスのご案内です。"
+      },
+      {
+        "title": "社長ブログ",
+        "thumbnail": "/images/about/picture_5.jpg",
+        "path": "/blog/",
+        "description": "シナプス代表の竹内によるブログです。会社の理念や社内の動き、竹内が今考えていることなどについて定期的に更新します。"
+      }
+    ]
+  },
+  {
+    "title": "シナプスの技術",
+    "titleEn": "Technology",
+    "path": "/technology/",
+    "isOnOtherLink": true,
+    "picture": "/images/index/work_picture_1.jpg",
+    "children": [
+      {
+        "title": "シナプスの技術力",
+        "thumbnail": "/images/index/work_picture_1.jpg",
+        "path": "/technology/skills/",
+        "description": "シナプスが持つ最大の強みは、インターネットサービスプロバイダとして、24時間365日稼働させ続ける高い技術力です。ネットワーク、システム、Web、お客様サポートといった、シナプスを支える幅広い技術について、それぞれご紹介します。"
+      },
+      {
+        "title": "シナプス技術者ブログ",
+        "thumbnail": "/images/technology/picture_2.jpg",
+        "path": "https://tech.synapse.jp/",
+        "isExternal": true,
+        "description": "「技術」を生命線にしているシナプスのエンジニアにとって、日々のインプット／アウトプットは欠かせません。「シナプス技術者ブログ」では新技術へのチャレンジや、運用面でのトラブルシューティングなど、技術的知見を積極的に発信していきます。"
+      },
+      {
+        "title": "座談会",
+        "thumbnail": "/images/index/work_picture_2.jpg",
+        "path": "/technology/discussion/",
+        "description": "特定の技術の話題や働き方についてなど、ある一つのテーマについてスタッフ同士で議論し合う座談会です。"
+      }
+    ]
+  },
+  {
+    "title": "シナプスの仕事と人",
+    "titleEn": "Work",
+    "path": "/work/",
+    "isOnOtherLink": true,
+    "picture": "/images/work/picture_2.jpg",
+    "children": [
+      {
+        "title": "職種紹介",
+        "thumbnail": "/images/work/picture_1.jpg",
+        "path": "/work/job/",
+        "description": "シナプスで働くスタッフの職種について「技術職」「お客様対応」「広報・企画」の3つのカテゴリに分け、その役割と仕事内容をご紹介します。"
+      },
+      {
+        "title": "スタッフ紹介",
+        "thumbnail": "/images/work/picture_2.jpg",
+        "path": "/work/staff/",
+        "description": "シナプスで働くスタッフを各職種ごとにご紹介します。"
+      },
+      {
+        "title": "スタッフブログ",
+        "thumbnail": "/images/work/picture_5.jpg",
+        "path": "/staff-blog/",
+        "description": "シナプスのスタッフが定期的に更新するブログです。"
+      },
+      {
+        "title": "採用情報",
+        "thumbnail": "/images/work/picture_3.jpg",
+        "path": "/work/recruit/",
+        "description": "シナプスへの入社希望者への募集要項等の採用情報です。"
+      },
+      {
+        "title": "採用エントリー",
+        "thumbnail": "/images/work/picture_4.jpg",
+        "path": "/work/entry/",
+        "description": "採用エントリーの入力フォームです。シナプスへの入社をご希望の方は、こちらからエントリーをお願いします。"
+      }
+    ]
+  },
+  {
+    "title": "会社情報",
+    "titleEn": "Company",
+    "path": "/company/",
+    "children": [
+      {
+        "title": "会社概要",
+        "path": "/company/#outline"
+      },
+      {
+        "title": "アクセス",
+        "path": "/company/#access"
+      },
+      {
+        "title": "沿革",
+        "path": "/company/#history"
+      }
+    ]
+  },
+  {
+    "title": "お知らせ",
+    "titleEn": "News",
+    "path": "/news/"
+  },
+  {
+    "title": "お問い合わせ",
+    "titleEn": "Contact",
+    "path": "/contact/"
+  },
+  {
+    "title": "プライバシーポリシー",
+    "titleEn": "Privacy Policy",
+    "isExternal": true,
+    "path": "https://www.synapse.jp/notice/private.html",
+    "isDisableOnHeader": true,
+    "isDisableOnFooter": true
+  }
+]
