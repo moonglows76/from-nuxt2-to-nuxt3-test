@@ -1,0 +1,30 @@
+@use 'variables' as *;
+
+@mixin hover {
+  @media screen and (min-width: $breakpoint-1) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin fontTsuku {
+  font-family: TsukuAntiqueLGoStd-B
+}
+
+@mixin boxShadow {
+  box-shadow: 3px 3px 10px 2px rgba(0, 0, 0, 0.1);
+}
+
+@mixin resetInput {
+  resize: none;
+  appearance: none;
+  outline: none;
+  border: none;
+}
+
+@mixin smartphone {
+  @media screen and (max-width: $breakpoint-1) {
+    @content;
+  }
+}
