@@ -1,41 +1,30 @@
-# Nuxt 3 Minimal Starter
+# Nuxt2からNuxt3への移行テスト
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## セットアップ
 
-## Setup
-
-Make sure to install the dependencies:
+### 必要なモジュールのインストール
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
 # yarn
 yarn install
-
-# bun
-bun install
 ```
+
+### Visual Studio Codeの拡張機能のチェック
+
+1. VScodeのサイドバーにある拡張機能ボタンをクリック
+2. 上部のテキストボックスで「Vetur」を検索
+3. 「Vetur」の歯車アイコンをクリックして「無効にする（ワークスペース）」をクリック
+4. VScodeを再起動するように促されるので、OKする
+5. （Vue - Official（旧Volar）をインストールしていなかったら）[Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar)にアクセスしてInstallボタンからインストール
+
 
 ## Development Server
 
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
 # yarn
 yarn dev
-
-# bun
-bun run dev
 ```
 
 ## Production
@@ -43,33 +32,15 @@ bun run dev
 Build the application for production:
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
 # yarn
 yarn build
-
-# bun
-bun run build
 ```
 
 Locally preview production build:
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
 # yarn
 yarn preview
-
-# bun
-bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
