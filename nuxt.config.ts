@@ -111,4 +111,13 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig: {
+    public: {
+      url,
+      titleTemplate: `%s - ${title}`,
+      description,
+      apiEndpoint,
+      isPreviewMode: isPreviewMode ? { wpAccessToken } : {},
+    }
+  },
 })
