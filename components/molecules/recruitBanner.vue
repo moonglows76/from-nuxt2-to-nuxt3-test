@@ -2,11 +2,18 @@
   <delayed-show class="recruit-banner">
     <figure>
       <img
-        v-for="n in 3"
-        :key="n"
-        class="recruit-banner__picture"
-        :class="`recruit-banner__picture--${n}`"
-        :src="require(`~/assets/images/common/recruit_picture_${n}.png`)"
+        class="recruit-banner__picture recruit-banner__picture--1"
+        src="~/assets/images/common/recruit_picture_1.png"
+        alt=""
+      />
+      <img
+        class="recruit-banner__picture recruit-banner__picture--2"
+        src="~/assets/images/common/recruit_picture_2.png"
+        alt=""
+      />
+      <img
+        class="recruit-banner__picture recruit-banner__picture--2"
+        src="~/assets/images/common/recruit_picture_3.png"
         alt=""
       />
     </figure>
