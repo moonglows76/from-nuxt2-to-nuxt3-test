@@ -62,7 +62,6 @@
         <template v-for="(subLink, index) in subLinks">
           <a
             v-if="subLink.isExternal"
-            :key="index"
             :href="subLink.path"
             class="sublink hover-opacity"
             target="_blank"
@@ -71,7 +70,6 @@
           </a>
           <nuxt-link
             v-else
-            :key="index"
             :to="subLink.path"
             class="sublink hover-opacity"
           >
@@ -102,23 +100,30 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import links from '@/assets/jsons/links'
 import socials from '@/assets/jsons/socials'
 
-export default {
-  data() {
-    return {
-      socials,
-      mainLinks: links.filter((link) => {
-        return link.children && !link.isDisableOnFooter
-      }),
-      subLinks: links.filter((link) => {
-        return !link.children && !link.isDisableOnFooter
-      }),
-    }
-  },
-}
+const mainLinks = links.filter((link) => {
+  return link.children && !link.isDisableOnFooter
+});
+const subLinks = links.filter((link) => {
+  return !link.children && !link.isDisableOnFooter
+});
+
+// export default {
+//   data() {
+//     return {
+//       socials,
+//       mainLinks: links.filter((link) => {
+//         return link.children && !link.isDisableOnFooter
+//       }),
+//       subLinks: links.filter((link) => {
+//         return !link.children && !link.isDisableOnFooter
+//       }),
+//     }
+//   },
+// }
 </script>
 
 <style scoped lang="scss">
