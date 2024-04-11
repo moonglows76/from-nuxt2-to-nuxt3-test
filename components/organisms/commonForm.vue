@@ -133,18 +133,18 @@
 import scroll from 'scroll'
 import scrollDoc from 'scroll-doc'
 import { ValidationObserver, ValidationProvider, extend } from 'vee-validate'
-import { required, email } from 'vee-validate/dist/rules'
+// import { required, email } from 'vee-validate/dist/rules'
 import commonButton from '@/components/atoms/commonButton'
 
-extend('required', {
-  ...required,
-  message: '入力必須項目です。',
-})
+// extend('required', {
+//   ...required,
+//   message: '入力必須項目です。',
+// })
 
-extend('email', {
-  ...email,
-  message: '正しいメールアドレスを入力してください。',
-})
+// extend('email', {
+//   ...email,
+//   message: '正しいメールアドレスを入力してください。',
+// })
 
 export default {
   components: { commonButton, ValidationObserver, ValidationProvider },
