@@ -10,7 +10,14 @@
 </template>
 
 <script setup>
+const title = 'テスト'
+const config = useRuntimeConfig()
+const route = useRoute()
 
+useHead({
+  title: config.public.titleTemplate.replace(/%s/, title),
+  url: `${config.url}${route.path.slice(1)}`,
+})
 </script>
 
 <style scoped lang="scss">
