@@ -122,11 +122,12 @@ export default {
 .container {
   min-width: 960px;
 
-  :deep(.firstview) {
-    height: 400px;
-
-    &__title-en {
-      color: $color-black-1;
+  :deep() {
+    .firstview {
+      height: 400px;
+      &__title-en {
+        color: $color-black-1;
+      }
     }
   }
 

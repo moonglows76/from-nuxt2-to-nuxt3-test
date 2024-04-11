@@ -146,9 +146,11 @@ export default {
     background-color: $color-gray-2;
   }
 
-  :deep(.firstview) {
-    &__description {
-      padding: 0 8px;
+  :deep() {
+    .firstview {
+      &__description {
+        padding: 0 8px;
+      }
     }
   }
 }
@@ -273,9 +275,6 @@ export default {
     :deep(.firstview) {
       padding-top: 120px;
       padding-bottom: 148px;
-
-      &__background {
-      }
     }
 
     :deep(.breadcrumb) {

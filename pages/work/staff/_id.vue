@@ -123,9 +123,11 @@ export default {
 
 <style scoped lang="scss">
 .container {
-  :deep(.firstview2) {
-    &__role-en {
-      display: none;
+  :deep() {
+    .firstview2 {
+      &__role-en {
+        display: none;
+      }
     }
   }
 
@@ -141,9 +143,11 @@ export default {
 
 @include smartphone {
   .container {
-    :deep(.firstview2) {
-      &__title-container {
-        bottom: 84px;
+    :deep() {
+      .firstview2 {
+        &__title-container {
+          bottom: 84px;
+        }
       }
     }
 

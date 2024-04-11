@@ -649,15 +649,17 @@ export default {
     margin-top: 64px;
   }
 
-  :deep(.label-animation) {
-    line-height: 64px;
-    margin: 12px 0;
-    font-size: 32px;
-    font-weight: bold;
-    @include fontTsuku;
+  :deep() {
+    .label-animation {
+      line-height: 64px;
+      margin: 12px 0;
+      font-size: 32px;
+      font-weight: bold;
+      @include fontTsuku;
 
-    &__content {
-      padding-left: 16px;
+      &__content {
+        padding-left: 16px;
+      }
     }
   }
 

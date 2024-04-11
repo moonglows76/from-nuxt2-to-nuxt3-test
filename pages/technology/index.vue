@@ -71,11 +71,12 @@ export default {
     top: 372px;
   }
 
-  :deep(.firstview) {
-    overflow: initial;
-
-    &__description {
-      padding: 0 8px;
+  :deep() {
+    .firstview {
+      overflow: initial;
+      &__description {
+        padding: 0 8px;
+      }
     }
   }
 }

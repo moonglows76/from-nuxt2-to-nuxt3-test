@@ -195,15 +195,17 @@ export default {
     left: 112px;
   }
 
-  :deep(.label-animation) {
-    margin: 8px 0;
-    color: $color-black-1;
-    @include fontTsuku;
-    font-size: 40px;
-    font-weight: bold;
+  :deep() {
+    .label-animation {
+      margin: 8px 0;
+      color: $color-black-1;
+      @include fontTsuku;
+      font-size: 40px;
+      font-weight: bold;
 
-    &__content {
-      padding: 12px 16px;
+      &__content {
+        padding: 12px 16px;
+      }
     }
   }
 }
@@ -260,12 +262,14 @@ export default {
       right: $padding-1;
       left: $padding-1;
     }
-    :deep(.label-animation) {
-      margin: 2px 0;
-      font-size: 18px;
+    :deep() {
+      .label-animation {
+        margin: 2px 0;
+        font-size: 18px;
 
-      &__content {
-        padding: 8px 8px;
+        &__content {
+          padding: 8px 8px;
+        }
       }
     }
   }

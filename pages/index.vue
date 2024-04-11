@@ -187,7 +187,7 @@
 </template>
 
 <script>
-import { parseString } from 'xml2js'
+// import { parseString } from 'xml2js'
 import { gsap } from 'gsap'
 import moment from 'moment'
 import commonButton from '@/components/atoms/commonButton'
@@ -464,14 +464,16 @@ export default {
       })
 
       const techBlog = techBlogRawData
-        ? await new Promise((resolve) => {
-            parseString(techBlogRawData, (error, result) => {
-              if (error) {
-                console.log(error)
-              }
-              resolve(result?.rss?.channel?.[0]?.item)
-            })
-          })
+        ? 
+          []
+          // await new Promise((resolve) => {
+          //   parseString(techBlogRawData, (error, result) => {
+          //     if (error) {
+          //       console.log(error)
+          //     }
+          //     resolve(result?.rss?.channel?.[0]?.item)
+          //   })
+          // })
         : []
 
       techBlog.forEach((_techBlog) => {

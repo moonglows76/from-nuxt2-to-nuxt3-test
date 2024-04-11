@@ -165,11 +165,12 @@ export default {
     background-color: $color-gray-2;
   }
 
-  :deep(.firstview) {
-    background-position: center 30%;
-
-    &__description {
-      padding: 0 8px;
+  :deep() {
+    .firstview {
+      background-position: center 30%;
+      &__description {
+        padding: 0 8px;
+      }
     }
   }
 }
@@ -291,9 +292,11 @@ export default {
   .container {
     min-width: initial;
 
-    :deep(.firstview) {
-      &__background {
-        background-position: left center;
+    :deep() {
+      .firstview {
+        &__background {
+          background-position: left center;
+        }
       }
     }
 

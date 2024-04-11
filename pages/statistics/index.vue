@@ -813,14 +813,16 @@ export default {
           }
         }
 
-        :deep(.number) {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(160px, -70px) scale(0.45);
+        :deep() {
+          .number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(160px, -70px) scale(0.45);
 
-          &__number {
-            color: white;
+            &__number {
+              color: white;
+            }
           }
         }
       }
@@ -898,11 +900,12 @@ export default {
           }
         }
 
-        :deep(.number) {
-          transform: translate(50px, 85px) scale(0.4);
-
-          &__number {
-            color: white;
+        :deep() {
+          .number {
+            transform: translate(50px, 85px) scale(0.4);
+            &__number {
+              color: white;
+            }
           }
         }
       }
@@ -1001,15 +1004,17 @@ export default {
           margin-top: 30px;
         }
 
-        :deep(.number) {
-          position: absolute;
-          top: 120px;
-          right: 0;
-          left: 0;
-          transform: scale(0.6);
+        :deep() {
+          .number {
+            position: absolute;
+            top: 120px;
+            right: 0;
+            left: 0;
+            transform: scale(0.6);
 
-          &__number {
-            color: $color-green-1;
+            &__number {
+              color: $color-green-1;
+            }
           }
         }
       }
@@ -1088,16 +1093,18 @@ export default {
           margin-left: -80px;
         }
 
-        :deep(.number) {
-          position: absolute;
-          top: 140px;
-          left: 50%;
-          transform: translateX(0px) scale(0.6);
+        :deep() {
+          .number {
+            position: absolute;
+            top: 140px;
+            left: 50%;
+            transform: translateX(0px) scale(0.6);
 
-          &__number {
-            display: block;
-            width: 1em;
-            text-align: center;
+            &__number {
+              display: block;
+              width: 1em;
+              text-align: center;
+            }
           }
         }
       }

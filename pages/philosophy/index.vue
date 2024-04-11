@@ -137,11 +137,12 @@ export default {
 
 <style scoped lang="scss">
 .container {
-  :deep(.firstview2) {
-    color: $color-black-1;
-
-    &__role-en {
-      opacity: 0.1;
+  :deep() {
+    .firstview2 {
+      color: $color-black-1;
+      &__role-en {
+        opacity: 0.1;
+      }
     }
   }
 

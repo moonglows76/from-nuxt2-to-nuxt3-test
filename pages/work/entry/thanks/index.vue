@@ -114,13 +114,14 @@ export default {
       padding: 40px $padding-1;
     }
 
-    :deep(.breadcrumb) {
-      top: 196px;
-
-      &__content {
-        &:nth-child(3) {
-          .breadcrumb__dot {
-            display: none;
+    :deep() {
+      .breadcrumb {
+        top: 196px;
+        &__content {
+          &:nth-child(3) {
+            .breadcrumb__dot {
+              display: none;
+            }
           }
         }
       }
