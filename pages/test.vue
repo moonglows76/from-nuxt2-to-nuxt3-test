@@ -16,7 +16,7 @@ const route = useRoute()
 
 useHead({
   title: config.public.titleTemplate.replace(/%s/, title),
-  url: `${config.url}${route.path.slice(1)}`,
+  url: `${config.public.url}${route.path.slice(1)}`,
 })
 </script>
 
