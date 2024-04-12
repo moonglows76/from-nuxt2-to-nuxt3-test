@@ -110,20 +110,6 @@ const mainLinks = links.filter((link) => {
 const subLinks = links.filter((link) => {
   return !link.children && !link.isDisableOnFooter
 });
-
-// export default {
-//   data() {
-//     return {
-//       socials,
-//       mainLinks: links.filter((link) => {
-//         return link.children && !link.isDisableOnFooter
-//       }),
-//       subLinks: links.filter((link) => {
-//         return !link.children && !link.isDisableOnFooter
-//       }),
-//     }
-//   },
-// }
 </script>
 
 <style scoped lang="scss">
