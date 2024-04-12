@@ -1,15 +1,15 @@
 <template>
-  <div class="enclosure">
-    <div class="content">
-      <p class="content__title">404 Not Found</p>
-      <p class="content__description">お探しのページは見つかりません。</p>
+  <NuxtLayout name="default">
+    <div class="enclosure">
+      <div class="content">
+        <p class="content__title">404 Not Found</p>
+        <p class="content__description">お探しのページは見つかりません。</p>
+      </div>
     </div>
-  </div>
-  <MoleculesCommonFooter />
+  </NuxtLayout>
 </template>
 
-<script>
-export default {}
+<script setup>
 </script>
 
 <style scoped lang="scss">
