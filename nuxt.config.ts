@@ -120,4 +120,5 @@ export default defineNuxtConfig({
       isPreviewMode: isPreviewMode ? { wpAccessToken } : {},
     }
   },
+  modules: ['@pinia/nuxt'],
 })
