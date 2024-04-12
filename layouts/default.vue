@@ -1,6 +1,14 @@
 <template>
   <div class="enclosure">
     <div class="nuxt-container">
+      <p>
+        bodyScale: {{ bodyScale }}<br>
+        isSmartphone: {{ $store.isSmartphone }}<br>
+        imageSuffix: {{ $store.imageSuffix }}<br>
+        firstviewColor: {{ $store.firstviewColor }}<br>
+        fontReloadCount: {{ $store.fontReloadCount }}<br>
+        isOpenModal: {{ $store.isOpenModal }}<br>
+      </p>
       <slot />
     </div>
 
@@ -18,69 +26,64 @@ import comp from '~/components/organisms/comp'
 // import commonHeader from '@/components/molecules/commonHeader'
 
 export default {
-
-}
-
-// export default {
 //   components: { comp, commonHeader, commonFooter },
-//   data() {
-//     return {
-//       bodyScale: 'none',
-//     }
-//   },
-//   watch: {
-//     '$store.state.isOpenModal'(val) {
-//       document.body.style.transform = val ? 'none' : this.bodyScale
-//     },
-//   },
-//   mounted() {
-//     this.onResize()
-//     this.onScroll()
-//     window.addEventListener('resize', this.onResize)
-//     window.addEventListener('scroll', this.onScroll)
-//   },
-//   methods: {
-//     onScroll() {
-//       if (this.$store.state.isOpenModal) {
-//         return
-//       }
+  data() {
+    return {
+      bodyScale: 'none',
+    }
+  },
+  watch: {
+    '$store.isOpenModal'(val) {
+      document.body.style.transform = val ? 'none' : this.bodyScale
+    },
+  },
+  mounted() {
+    this.onResize()
+    this.onScroll()
+    window.addEventListener('resize', this.onResize)
+    window.addEventListener('scroll', this.onScroll)
+  },
+  methods: {
+    onScroll() {
+      if (this.$store.isOpenModal) {
+        return
+      }
 
-//       const windowWidth = window.innerWidth
-//       if (
-//         windowWidth >= parseInt(variables['breakpoint-1']) &&
-//         windowWidth < parseInt(variables['breakpoint-3'])
-//       ) {
-//         const scale = windowWidth / parseInt(variables['breakpoint-3'])
-//         document.body.style.height = `${this.$el.clientHeight * scale}px`
-//       } else {
-//         document.body.style.height = 'auto'
-//       }
-//     },
-//     onResize() {
-//       // TODOlater check other browser
-//       const windowWidth = window.innerWidth
-//       if (
-//         windowWidth >= parseInt(variables['breakpoint-1']) &&
-//         windowWidth < parseInt(variables['breakpoint-3'])
-//       ) {
-//         this.bodyScale = `scale(${
-//           windowWidth / parseInt(variables['breakpoint-3'])
-//         })`
-//       } else {
-//         this.bodyScale = 'none'
-//       }
+      const windowWidth = window.innerWidth
+      if (
+        windowWidth >= parseInt(variables['breakpoint-1']) &&
+        windowWidth < parseInt(variables['breakpoint-3'])
+      ) {
+        const scale = windowWidth / parseInt(variables['breakpoint-3'])
+        document.body.style.height = `${this.$el.clientHeight * scale}px`
+      } else {
+        document.body.style.height = 'auto'
+      }
+    },
+    onResize() {
+      // TODOlater check other browser
+      const windowWidth = window.innerWidth
+      if (
+        windowWidth >= parseInt(variables['breakpoint-1']) &&
+        windowWidth < parseInt(variables['breakpoint-3'])
+      ) {
+        this.bodyScale = `scale(${
+          windowWidth / parseInt(variables['breakpoint-3'])
+        })`
+      } else {
+        this.bodyScale = 'none'
+      }
 
-//       if (!this.$store.state.isOpenModal) {
-//         document.body.style.transform = this.bodyScale
-//       }
+      if (!this.$store.isOpenModal) {
+        document.body.style.transform = this.bodyScale
+      }
 
-//       this.$store.commit(
-//         'updateIsSmartphone',
-//         windowWidth < parseInt(variables['breakpoint-1'])
-//       )
-//     },
-//   },
-// }
+      this.$store.updateIsSmartphone(
+        windowWidth < parseInt(variables['breakpoint-1'])
+      )
+    },
+  },
+}
 </script>
 
 <style scoped lang="scss">
