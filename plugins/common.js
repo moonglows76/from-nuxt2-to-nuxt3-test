@@ -1,17 +1,35 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 
-Vue.mixin({
-  methods: {
-    sleep(duration) {
-      return new Promise((resolve) => {
-        setTimeout(resolve, duration)
-      })
-    },
-    fontReload() {
-      if (process.env.wpAccessToken || this.$store.state.fontReloadCount > 0) {
-        window.FONTPLUS.reload()
-      }
-      this.$store.commit('incrementFontReloadCount')
-    },
-  },
+export default defineNuxtPlugin(() => {
+  const config = useRuntimeConfig()
+  return {
+    provide: {
+      sleep(duration) {
+        return new Promise((resolve) => {
+          setTimeout(resolve, duration)
+        })
+      },
+      fontReload() {
+        if (config.public.wpAccessToken || this.$store.fontReloadCount > 0) {
+          window.FONTPLUS.reload()
+        }
+        this.$store.incrementFontReloadCount()
+      },
+    }
+  }
 })
+// Vue.mixin({
+//   methods: {
+//     sleep(duration) {
+//       return new Promise((resolve) => {
+//         setTimeout(resolve, duration)
+//       })
+//     },
+//     fontReload() {
+//       if (process.env.wpAccessToken || this.$store.state.fontReloadCount > 0) {
+//         window.FONTPLUS.reload()
+//       }
+//       this.$store.commit('incrementFontReloadCount')
+//     },
+//   },
+// })
