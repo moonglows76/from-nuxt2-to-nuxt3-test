@@ -14,7 +14,7 @@
 
     <MoleculesCommonFooter />
 
-    <!-- <common-header /> -->
+    <MoleculesCommonHeader />
 
     <!-- <comp /> -->
   </div>

@@ -70,7 +70,7 @@
           <div
             class="menu-content__child-container-container"
             :style="{
-              height: $store.state.isSmartphone
+              height: $store.isSmartphone
                 ? `${link.childrenHeight}px`
                 : 'auto',
             }"
@@ -82,7 +82,6 @@
               <template v-for="(child, childIndex) in link.children">
                 <a
                   v-if="child.path.startsWith('http')"
-                  :key="childIndex"
                   class="menu-content__child hover-opacity"
                   :href="child.path"
                   target="_black"
@@ -92,7 +91,6 @@
 
                 <nuxt-link
                   v-else
-                  :key="childIndex"
                   class="menu-content__child hover-opacity"
                   :to="child.path"
                   @click.native="onClickLink"
@@ -159,7 +157,7 @@
     <h1
       class="common-header__title"
       :style="{
-        color: isOpen ? '#ffffff' : $store.state.firstviewColor,
+        color: isOpen ? '#ffffff' : $store.firstviewColor,
       }"
     >
       <nuxt-link to="/" @click.native="onClickLink"> SYNAPSE </nuxt-link>
@@ -197,14 +195,14 @@ export default {
   },
   watch: {
     isOpen(val) {
-      this.$store.commit('updateIsOpenModal', val)
+      this.$store.updateIsOpenModal(val)
       this.preventScroll(val)
       this.animateMenuContents()
     },
   },
   mounted() {
     this.links.forEach((link) => {
-      this.$set(link, 'childrenHeight', 0)
+      link.childrenHeight = 0
     })
   },
   methods: {
@@ -369,6 +367,7 @@ export default {
       transform: scaleX(0.8);
       font-weight: bold;
       content: '>';
+      margin-right: 6px;
     }
   }
 
@@ -391,6 +390,7 @@ export default {
 
     &:before {
       content: '・';
+      margin-right: 6px;
     }
   }
 
@@ -449,6 +449,7 @@ export default {
       background-size: contain;
       background-repeat: no-repeat;
       content: '>';
+      margin-right: 6px;
     }
 
     &--Contact {
@@ -475,7 +476,7 @@ export default {
       display: inline-block;
       width: 18px;
       height: 18px;
-      margin-right: 8px;
+      margin-right: 14px;
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
