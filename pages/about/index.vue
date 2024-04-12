@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <firstview
+    <!-- <firstview
       title-en="About"
       :title="title"
       description="経営理念や特長、展開するサービスなどについて、シナプスのありのままをご紹介します。"
-    />
+    /> -->
 
-    <breadcrumb :contents="breadcrumbContents" />
+    <!-- <breadcrumb :contents="breadcrumbContents" />
 
-    <page-index :contents="contents" />
+    <page-index :contents="contents" /> -->
 
-    <other-links />
+    <!-- <other-links /> -->
   </div>
 </template>
 
@@ -20,7 +20,7 @@ import firstview from '@/components/organisms/firstview'
 import breadcrumb from '@/components/molecules/breadcrumb'
 import otherLinks from '@/components/molecules/otherLinks'
 import pageIndex from '@/components/organisms/pageIndex'
-import updateMeta from '@/plugins/updateMeta'
+// import updateMeta from '@/plugins/updateMeta'
 
 export default {
   components: {
@@ -30,6 +30,7 @@ export default {
     pageIndex,
   },
   asyncData({ route }) {
+    console.log(route)
     return {
       contents: links.find((link) => {
         return link.path.replace(/\/$/, '') === route.path.replace(/\/$/, '')
@@ -52,16 +53,29 @@ export default {
     }
   },
   head() {
-    return updateMeta({
+    return this.$updateMeta({
       title: process.env.titleTemplate.replace(/%s/, this.title),
       url: `${process.env.url}${this.$route.path.slice(1)}`,
     })
   },
   mounted() {
-    this.fontReload()
+    this.$fontReload()
   },
 }
 </script>
+
+<!-- <script setup>
+const config = useRuntimeConfig()
+const route  = useRoute()
+const nuxtApp = useNuxtApp()
+
+useHead(
+  nuxtApp.$updateMeta({
+    title: config.public.titleTemplate.replace(/%s/, 'シナプスについて'),
+    url: `${config.public.url}${route.path.slice(1)}`,
+  })
+)
+</script> -->
 
 <style scoped lang="scss">
 .container {
