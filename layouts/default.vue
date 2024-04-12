@@ -16,17 +16,14 @@
 
     <MoleculesCommonHeader />
 
-    <!-- <comp /> -->
+    <OrganismsComp />
   </div>
 </template>
 
 <script>
 import variables from '~/variables'
-import comp from '~/components/organisms/comp'
-// import commonHeader from '@/components/molecules/commonHeader'
 
 export default {
-//   components: { comp, commonHeader, commonFooter },
   data() {
     return {
       bodyScale: 'none',
