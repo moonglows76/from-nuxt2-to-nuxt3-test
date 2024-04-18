@@ -1,41 +1,31 @@
 <template>
   <div class="container">
-    <!-- <firstview
+    <firstview
       title-en="About"
       :title="title"
       description="経営理念や特長、展開するサービスなどについて、シナプスのありのままをご紹介します。"
-    /> -->
+    />
 
-    <!-- <breadcrumb :contents="breadcrumbContents" />
+    <breadcrumb :contents="breadcrumbContents" />
 
-    <page-index :contents="contents" /> -->
+    <page-index :contents="contents" />
 
-    <!-- <other-links /> -->
+    <other-links />
   </div>
 </template>
 
 <script>
-import links from '@/assets/jsons/links'
 import firstview from '@/components/organisms/firstview'
 import breadcrumb from '@/components/molecules/breadcrumb'
 import otherLinks from '@/components/molecules/otherLinks'
 import pageIndex from '@/components/organisms/pageIndex'
-// import updateMeta from '@/plugins/updateMeta'
 
-export default {
+export default defineComponent({
   components: {
     firstview,
     breadcrumb,
     otherLinks,
     pageIndex,
-  },
-  asyncData({ route }) {
-    console.log(route)
-    return {
-      contents: links.find((link) => {
-        return link.path.replace(/\/$/, '') === route.path.replace(/\/$/, '')
-      })?.children,
-    }
   },
   data() {
     return {
@@ -52,30 +42,35 @@ export default {
       ],
     }
   },
-  head() {
-    return this.$updateMeta({
-      title: process.env.titleTemplate.replace(/%s/, this.title),
-      url: `${process.env.url}${this.$route.path.slice(1)}`,
-    })
-  },
   mounted() {
     this.$fontReload()
   },
-}
+})
 </script>
 
-<!-- <script setup>
+<script setup>
+// composables
 const config = useRuntimeConfig()
-const route  = useRoute()
 const nuxtApp = useNuxtApp()
+const route  = useRoute()
 
+// jsonの読み込み
+const links = await import('@/assets/jsons/links.json')
+  .then((module) => module.default)
+
+// ページコンテンツの取得
+const contents = links.find((link) => {
+  return link.path.replace(/\/$/, '') === route.path.replace(/\/$/, '')
+})?.children
+
+// head要素内の設定
 useHead(
   nuxtApp.$updateMeta({
     title: config.public.titleTemplate.replace(/%s/, 'シナプスについて'),
     url: `${config.public.url}${route.path.slice(1)}`,
   })
 )
-</script> -->
+</script>
 
 <style scoped lang="scss">
 .container {
