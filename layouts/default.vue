@@ -1,14 +1,15 @@
 <template>
   <div class="enclosure">
     <div class="nuxt-container">
-      <p>
+      <!-- state参照用の要素 -->
+      <div style="position: fixed; right: 0; top: 0; z-index: 10;">
         bodyScale: {{ bodyScale }}<br>
         isSmartphone: {{ $store.isSmartphone }}<br>
         imageSuffix: {{ $store.imageSuffix }}<br>
         firstviewColor: {{ $store.firstviewColor }}<br>
         fontReloadCount: {{ $store.fontReloadCount }}<br>
         isOpenModal: {{ $store.isOpenModal }}<br>
-      </p>
+      </div>
       <slot />
     </div>
 
