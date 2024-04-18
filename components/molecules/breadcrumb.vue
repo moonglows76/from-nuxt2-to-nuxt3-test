@@ -20,7 +20,7 @@
 </template>
 
 <script>
-export default {
+export default defineComponent({
   props: {
     contents: {
       type: Array,
@@ -31,11 +31,11 @@ export default {
   },
   methods: {
     limitMaxLength(text) {
-      const maxLength = this.$store.state.isSmartphone ? 15 : 9999
+      const maxLength = this.$store.isSmartphone ? 15 : 9999
       return text.length <= maxLength ? text : `${text.slice(0, maxLength)}…`
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

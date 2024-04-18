@@ -28,7 +28,7 @@
 import links from '@/assets/jsons/links'
 import delayedShow from '@/components/atoms/delayedShow'
 
-export default {
+export default defineComponent({
   components: { delayedShow },
   data() {
     return {
@@ -37,7 +37,7 @@ export default {
       }),
     }
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

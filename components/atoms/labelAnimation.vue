@@ -16,7 +16,7 @@
 <script>
 import { gsap, Power2 } from 'gsap'
 
-export default {
+export default defineComponent({
   props: {
     hasFadein: {
       type: Boolean,
@@ -40,11 +40,11 @@ export default {
     },
   },
   async mounted() {
-    await this.sleep(200)
+    await this.$sleep(200)
 
     this.originalWidth = this.$el.clientWidth
 
-    const widthThreshold = this.$store.state.isSmartphone
+    const widthThreshold = this.$store.isSmartphone
       ? 280
       : window.innerWidth - 224
     if (this.originalWidth >= widthThreshold) {
@@ -66,7 +66,7 @@ export default {
     async show() {
       this.isShow = true
 
-      await this.sleep(500)
+      await this.$sleep(500)
 
       await new Promise((resolve) => {
         gsap.to(this.$el, {
@@ -84,7 +84,7 @@ export default {
       })
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

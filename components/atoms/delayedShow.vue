@@ -17,7 +17,7 @@
 <script>
 import { gsap, Power2 } from 'gsap'
 
-export default {
+export default defineComponent({
   props: {
     delay: {
       type: Number,
@@ -59,7 +59,7 @@ export default {
           await this.showImage()
           break
         default:
-          await this.sleep(1500)
+          await this.$sleep(1500)
           break
       }
 
@@ -70,7 +70,7 @@ export default {
   async mounted() {
     window.addEventListener('scroll', this.updateShow)
 
-    await this.sleep(500)
+    await this.$sleep(500)
     this.updateShow()
   },
   destroyed() {
@@ -112,7 +112,7 @@ export default {
       }
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

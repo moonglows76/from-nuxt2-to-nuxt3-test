@@ -31,7 +31,7 @@
 import commonButton from '@/components/atoms/commonButton'
 import delayedShow from '@/components/atoms/delayedShow'
 
-export default {
+export default defineComponent({
   components: { commonButton, delayedShow },
   props: {
     contents: {
@@ -41,7 +41,7 @@ export default {
       },
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">
