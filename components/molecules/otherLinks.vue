@@ -7,7 +7,7 @@
       <delayed-show
         v-for="(link, index) in links"
         :key="index"
-        :delay="$store.state.isSmartphone ? 0 : 0.2 * index"
+        :delay="$store.isSmartphone ? 0 : 0.2 * index"
         class="other-links-content"
       >
         <nuxt-link :to="link.path" class="other-links-content__href">
