@@ -4,7 +4,7 @@ export default defineNuxtPlugin(() => {
 
   return {
     provide: {
-      updateMeta(title, url, description, image) {
+      updateMeta({title, url, description, image}) {
         let imageSrc = image?.src
         if (image && image.src && image.src.match(/^\/\//)) {
           imageSrc = `https:${image.src}`
