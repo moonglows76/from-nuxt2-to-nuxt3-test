@@ -24,6 +24,7 @@ yarn install
 下記のように記述して動作させます。
 
 ```
+# 上2つの実際の値はこちら
 # SERVER_NAME=corp
 # CORP_URL=https://${SERVER_NAME}/
 SERVER_NAME=localhost
