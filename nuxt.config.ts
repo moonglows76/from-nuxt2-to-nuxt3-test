@@ -7,7 +7,7 @@ const url = process.env.CORP_URL || 'https://corp.synapse.jp/'
 const keywords =
   '鹿児島,インターネット,プロバイダ,自社サービス,ネットワーク運用,サーバ運用,システム構築,Webサイト制作,サポート,地域密着,パートナー制度,コミュニティー支援,光,ADSL,ブロードバンド,マークメイザン'
 const wpAccessToken =
-  'dummy' 
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvY29ycC1yZXNvdXJjZS5zeW5hcHNlLmpwIiwiaWF0IjoxNTYxMzY3MTM5LCJuYmYiOjE1NjEzNjcxMzksImV4cCI6MTg3NjcyNzEzOSwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.YY271F44VjJ-Ec1yk3h2wdiNSZk8yPxWMo_9tFBd2wc'
 //const apiEndpoint = 'https://corp-resource.synapse.jp/wp-json/wp/v2/'
 const apiEndpoint = process.env.CORP_API_ENDPOINT || 'https://corp-resource.synapse.jp/wp-json/wp/v2/'
 
