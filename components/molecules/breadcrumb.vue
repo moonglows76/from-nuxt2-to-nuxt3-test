@@ -8,8 +8,9 @@
       <nuxt-link
         :to="content.link"
         class="breadcrumb__text"
-        v-text="limitMaxLength(content.title)"
-      />
+      >
+        {{ limitMaxLength(content.title) }}
+      </nuxt-link>
       <img
         src="/images/common/icon_arrow_black.png"
         alt=""
