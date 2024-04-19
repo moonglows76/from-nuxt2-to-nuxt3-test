@@ -18,6 +18,19 @@ yarn install
 5. （Vue - Official（旧Volar）をインストールしていなかったら）[Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar)にアクセスしてInstallボタンからインストール
 
 
+### .envの追加
+
+実際の環境の `.env` は違うフォルダーにありますが、この環境ではプロジェクトルートに `.env` ファイルを追加してください。
+下記のように記述して動作させます。
+
+```
+# SERVER_NAME=corp
+# CORP_URL=https://${SERVER_NAME}/
+SERVER_NAME=localhost
+CORP_URL=http://${SERVER_NAME}/
+CORP_API_ENDPOINT=${CORP_URL}apps/resource/wp-json/wp/v2/
+```
+
 ## Development Server
 
 Start the development server on `http://localhost:3000`:
