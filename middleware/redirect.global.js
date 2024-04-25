@@ -1,11 +1,11 @@
 export default defineNuxtRouteMiddleware((to, from) => {
+  // サーバーサイドでは何もしない
+  if (import.meta.server) return
   // パスの最後にスラッシュがない場合、スラッシュありのパスにリダイレクトする
-  console.log('from', from)
-  console.log('to', to)
-  // 無限ループっぽくなるのでコメントアウト
-  // if (to.path.slice(-1) !== '/') {
-  //   return navigateTo({ path: to.path + '/' })
-  // }
+  if (!to.path.endsWith('/')) {
+    const { pathname, search, hash } = new URL(to.fullPath, 'https://example.com')
+    return navigateTo(`${pathname}/${search}${hash}`)
+  }
 })
 
 // 元のコード
