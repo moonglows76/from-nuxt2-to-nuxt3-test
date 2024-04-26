@@ -1,4 +1,5 @@
-export default async function ({ route, params, $axios, base }) {
+/* 未作業なのでいったん拡張子をtxtに変更 */
+export default defineNuxtPlugin (async ({ route, params, $axios, base }) => {
   const isPreview = !!(route.query?.preview && process.env.wpAccessToken)
   const options = isPreview
     ? {
@@ -69,4 +70,4 @@ export default async function ({ route, params, $axios, base }) {
     prevLink,
     nextLink,
   }
-}
+})
