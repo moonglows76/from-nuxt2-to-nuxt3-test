@@ -23,18 +23,18 @@ import pageIndex from '@/components/organisms/pageIndex'
 import updateMeta from '@/plugins/updateMeta'
 
 export default defineNuxtComponent({
+  components: {
+    firstview,
+    breadcrumb,
+    otherLinks,
+    pageIndex,
+  },
   asyncData({ _route }) {
     return {
       contents: links.find((link) => {
         return link.path.replace(/\/$/, '') === _route.path.replace(/\/$/, '')
       })?.children,
     }
-  },
-  components: {
-    firstview,
-    breadcrumb,
-    otherLinks,
-    pageIndex,
   },
   data() {
     return {
