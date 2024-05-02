@@ -15,12 +15,21 @@
 </template>
 
 <script>
+import links from '@/assets/jsons/links'
 import firstview from '@/components/organisms/firstview'
 import breadcrumb from '@/components/molecules/breadcrumb'
 import otherLinks from '@/components/molecules/otherLinks'
 import pageIndex from '@/components/organisms/pageIndex'
+import updateMeta from '@/plugins/updateMeta'
 
-export default defineComponent({
+export default defineNuxtComponent({
+  asyncData({ _route }) {
+    return {
+      contents: links.find((link) => {
+        return link.path.replace(/\/$/, '') === _route.path.replace(/\/$/, '')
+      })?.children,
+    }
+  },
   components: {
     firstview,
     breadcrumb,
@@ -42,34 +51,16 @@ export default defineComponent({
       ],
     }
   },
+  head({ $config, $updateMeta, _route }) {
+    return $updateMeta({
+      title: $config.public.titleTemplate.replace(/%s/, 'シナプスについて'),
+      url: `${$config.public.url}${_route.path.slice(1)}`,
+    })
+  },
   mounted() {
     this.$fontReload()
   },
 })
-</script>
-
-<script setup>
-// composables
-const config = useRuntimeConfig()
-const nuxtApp = useNuxtApp()
-const route  = useRoute()
-
-// jsonの読み込み
-const links = await import('@/assets/jsons/links.json')
-  .then((module) => module.default)
-
-// ページコンテンツの取得
-const contents = links.find((link) => {
-  return link.path.replace(/\/$/, '') === route.path.replace(/\/$/, '')
-})?.children
-
-// head要素内の設定
-useHead(
-  nuxtApp.$updateMeta({
-    title: config.public.titleTemplate.replace(/%s/, 'シナプスについて'),
-    url: `${config.public.url}${route.path.slice(1)}`,
-  })
-)
 </script>
 
 <style scoped lang="scss">
