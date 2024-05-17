@@ -18,7 +18,8 @@
       <figure>
         <img
           v-for="(firstviewIllust, index) in firstviewIllusts"
-          v-show="$store.state.imageSuffix !== null"
+          v-show="$store.
+          imageSuffix !== null"
           :key="index"
           :src="
             require(`~/assets/images/statistics/firstview_illust_${
@@ -106,7 +107,7 @@
                   :no-comma="number.noComma"
                   :delay="
                     number.delay ||
-                    ($store.state.isSmartphone
+                    ($store.isSmartphone
                       ? 0
                       : 0.5 * (statisticsIndex % 2))
                   "
@@ -143,7 +144,7 @@ import modal from '@/components/organisms/modal'
 import delayedShow from '@/components/atoms/delayedShow'
 import updateMeta from '@/plugins/updateMeta'
 
-export default {
+export default defineNuxtComponent({
   components: { breadcrumb, otherLinks, number, modal, delayedShow },
   data() {
     return {
@@ -495,17 +496,17 @@ export default {
       modalDescription: null,
     }
   },
-  head() {
-    return updateMeta({
-      title: process.env.titleTemplate.replace(/%s/, this.title),
-      url: `${process.env.url}${this.$route.path.slice(1)}`,
+  head({ $config, $updateMeta, _route }) {
+    return $updateMeta({
+      title: $config.public.titleTemplate.replace(/%s/, '数字で見るシナプス'),
+      url: `${$config.public.url}${_route.path.slice(1)}`,
     })
   },
   async mounted() {
-    await this.sleep(50)
-    this.resetQuestions()
+    await this.$sleep(50)
+    this.$resetQuestions()
 
-    if (!this.$store.state.isSmartphone) {
+    if (!this.$store.isSmartphone) {
       window.addEventListener('resize', this.resetQuestions)
     }
   },
@@ -519,7 +520,7 @@ export default {
         return
       }
 
-      this.questionOffsetWidth = this.$store.state.isSmartphone ? 300 : 600
+      this.questionOffsetWidth = this.$store.isSmartphone ? 300 : 600
       this.isPreventResetQuestions = true
       this.questionTimeline && this.questionTimeline.kill()
       await this.setQuestions()
@@ -587,8 +588,8 @@ export default {
       })
     },
     async setQuestions() {
-      const questionWidth = this.$store.state.isSmartphone ? 300 : 600
-      const questionHeight = this.$store.state.isSmartphone ? 80 : 160
+      const questionWidth = this.$store.isSmartphone ? 300 : 600
+      const questionHeight = this.$store.isSmartphone ? 80 : 160
       const rowNumber = Math.floor(
         (this.$refs.firstview.clientWidth + this.questionOffsetWidth * 2) /
           questionWidth
@@ -619,7 +620,7 @@ export default {
             y:
               columnIndex * questionHeight +
               (Math.random() - 0.5) *
-                (this.$store.state.isSmartphone ? 20 : 40),
+                (this.$store.isSmartphone ? 20 : 40),
             diffX: 0,
           })
         })
@@ -634,14 +635,14 @@ export default {
       this.$set(statistics, 'showComment', true)
     },
     getFirstviewIllustSize(index) {
-      const device = this.$store.state.isSmartphone ? 'smartphone' : 'pc'
+      const device = this.$store.isSmartphone ? 'smartphone' : 'pc'
       return this.firstviewIllusts[index][device]
     },
     updateModalDescription(description) {
       this.modalDescription = description
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

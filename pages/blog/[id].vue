@@ -24,11 +24,11 @@ import articleContent from '@/components/organisms/articleContent'
 import backgroundLayer from '@/components/atoms/backgroundLayer'
 import linkContainer from '@/components/molecules/linkContainer'
 import firstview2 from '@/components/organisms/firstview2'
-import fetchWordpress from '@/plugins/fetchWordpress'
-import updateMeta from '@/plugins/updateMeta'
+// import fetchWordpress from '@/plugins/fetchWordpress'
+// import updateMeta from '@/plugins/updateMeta'
 import otherLinks from '@/components/molecules/otherLinks'
 
-export default {
+export default defineNuxtComponent({
   components: {
     breadcrumb,
     articleContent,
@@ -37,18 +37,20 @@ export default {
     firstview2,
     otherLinks,
   },
-  async asyncData({ $axios, params, route }) {
+  async asyncData({ $fetchWordpress, $config }) {
+    const route = useRoute()
+    const params = route.params
+
     const [
       { prevLink, nextLink, targetLink },
-      { data: categoryData }
+      categoryData,
     ] = await Promise.all([
-      fetchWordpress({
+      $fetchWordpress({
         route,
         params,
-        $axios,
         base: 'blog'
       }),
-      $axios.get(`${process.env.apiEndpoint}categories?per_page=100`)
+      $fetch(`${$config.public.apiEndpoint}categories?per_page=100`)
     ])
 
     const title = targetLink.title?.rendered?.replace(/<br>/g, '')
@@ -101,16 +103,18 @@ export default {
       ],
     }
   },
-  head() {
-    return updateMeta({
-      title: process.env.titleTemplate.replace(/%s/, this.titles.join('')),
-      url: `${process.env.url}${this.$route.path.slice(1)}`,
-    })
-  },
   mounted() {
-    this.fontReload()
+    const nuxtApp = useNuxtApp()
+    const config = useRuntimeConfig()
+    const route = useRoute()
+    const headObj = nuxtApp.$updateMeta({
+      title: config.public.titleTemplate.replace(/%s/, this.titles.join('')),
+      url: `${config.public.url}${route.path.slice(1)}`,
+    })
+    useHead(headObj)
+    this.$fontReload()
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

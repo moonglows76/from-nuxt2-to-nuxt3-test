@@ -14,7 +14,7 @@
 </template>
 
 <script>
-export default {
+export default defineNuxtComponent({
   props: {
     title: {
       type: String,
@@ -50,7 +50,7 @@ export default {
       this.$emit('click')
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

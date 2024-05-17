@@ -45,7 +45,7 @@ import updateMeta from '@/plugins/updateMeta'
 import otherLinks from '@/components/molecules/otherLinks'
 import tableTab from '@/components/molecules/tableTab'
 
-export default {
+export default defineNuxtComponent({
   components: {
     firstview,
     breadcrumb,
@@ -86,10 +86,10 @@ export default {
       ],
     }
   },
-  head() {
-    return updateMeta({
-      title: process.env.titleTemplate.replace(/%s/, this.title),
-      url: `${process.env.url}${this.$route.path.slice(1)}`,
+  head({ $config, $updateMeta, _route }) {
+    return $updateMeta({
+      title: $config.public.titleTemplate.replace(/%s/, '会社情報'),
+      url: `${$config.public.url}${_route.path.slice(1)}`,
     })
   },
   computed: {
@@ -110,8 +110,8 @@ export default {
     },
   },
   mounted() {
-    this.updateData()
-    this.fontReload()
+    this.$updateData
+    this.$fontReload
   },
   methods: {
     scrollToTab() {
@@ -129,11 +129,12 @@ export default {
       const companyData = companyDatas.find((companyData) => {
         return companyData.name === this.slug
       })
-      this.$set(this, 'lists', companyData?.values)
+      // this.$set(this, 'lists', companyData?.values)
+      this.lists = companyData?.values
       this.caption = companyData?.caption
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

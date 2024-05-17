@@ -130,6 +130,7 @@
 </template>
 
 <script>
+// TODO: バリデーション方法を決めて実装（vee-validateが大きく変わっているため）
 import scroll from 'scroll'
 import scrollDoc from 'scroll-doc'
 import { ValidationObserver, ValidationProvider, extend } from 'vee-validate'
@@ -146,7 +147,7 @@ import commonButton from '@/components/atoms/commonButton'
 //   message: '正しいメールアドレスを入力してください。',
 // })
 
-export default {
+export default defineNuxtComponent({
   components: { commonButton, ValidationObserver, ValidationProvider },
   props: {
     actionId: {
@@ -205,7 +206,7 @@ export default {
       }
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

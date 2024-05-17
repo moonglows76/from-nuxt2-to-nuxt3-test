@@ -31,7 +31,7 @@
 <script>
 import delayedShow from '@/components/atoms/delayedShow'
 
-export default {
+export default defineNuxtComponent({
   components: { delayedShow },
   props: {
     links: {
@@ -48,7 +48,7 @@ export default {
       })
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

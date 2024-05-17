@@ -25,7 +25,7 @@ import variables from '@/variables'
 import updateMeta from '@/plugins/updateMeta'
 import otherLinks from '@/components/molecules/otherLinks'
 
-export default {
+export default defineNuxtComponent({　
   components: {
     breadcrumb,
     articleContent,
@@ -154,20 +154,20 @@ IP-PBXをクラウド上で提供するビジネス系の光電話サービス�
       `,
     }
   },
-  head() {
-    return updateMeta({
-      title: process.env.titleTemplate.replace(/%s/, this.titles.join('')),
-      url: `${process.env.url}${this.$route.path.slice(1)}`,
+  head({ $config, $updateMeta, _route }) {
+    return $updateMeta({
+      title: $config.public.titleTemplate.replace(/%s/, 'シナプスの技術力'),
+      url: `${$config.public.url}${_route.path.slice(1)}`,
     })
   },
   mounted() {
-    this.$store.commit('updateFirstviewColor', '#FFFFFF')
-    this.fontReload()
+    this.$store.updateFirstviewColor('#FFFFFF')
+    this.$fontReload()
   },
   destroyed() {
-    this.$store.commit('updateFirstviewColor', variables['color-black-1'])
+    this.$store.updateFirstviewColor(variables['color-black-1'])
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

@@ -20,7 +20,7 @@ import firstview2 from '@/components/organisms/firstview2'
 import otherLinks from '@/components/molecules/otherLinks'
 import updateMeta from '@/plugins/updateMeta'
 
-export default {
+export default defineNuxtComponent({
   components: {
     breadcrumb,
     articleContent,
@@ -90,16 +90,16 @@ export default {
       `,
     }
   },
-  head() {
-    return updateMeta({
-      title: process.env.titleTemplate.replace(/%s/, this.title),
-      url: `${process.env.url}${this.$route.path.slice(1)}`,
+  head({ $config, $updateMeta, _route }) {
+    return $updateMeta({
+      title: $config.public.titleTemplate.replace(/%s/, 'シナプスの経営理念'),
+      url: `${$config.public.url}${_route.path.slice(1)}`,
     })
   },
   mounted() {
-    this.fontReload()
+    this.$fontReload()
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

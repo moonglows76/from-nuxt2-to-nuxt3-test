@@ -34,7 +34,7 @@ import commonForm from '@/components/organisms/commonForm'
 import updateMeta from '@/plugins/updateMeta'
 import otherLinks from '@/components/molecules/otherLinks'
 
-export default {
+export default defineNuxtComponent({
   components: {
     firstview,
     breadcrumb,
@@ -121,16 +121,16 @@ export default {
       ],
     }
   },
-  head() {
-    return updateMeta({
-      title: process.env.titleTemplate.replace(/%s/, this.title),
-      url: `${process.env.url}${this.$route.path.slice(1)}`,
+  head({ $config, $updateMeta, _route }) {
+    return $updateMeta({
+      title: $config.public.titleTemplate.replace(/%s/, 'お問い合わせ'),
+      url: `${$config.public.url}${_route.path.slice(1)}`,
     })
   },
   mounted() {
-    this.fontReload()
+    this.$fontReload()
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

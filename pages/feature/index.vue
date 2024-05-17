@@ -43,15 +43,18 @@
               class="content__image"
               :style="{
                 width: `${
-                  $store.state.isSmartphone
+                  // $store.state.isSmartphone
+                  $store.isSmartphone
                     ? image.widthSmartphone
                     : image.width
                 }px`,
                 top: `${
-                  $store.state.isSmartphone ? image.topSmartphone : image.top
+                  // $store.state.isSmartphone ? image.topSmartphone : image.top
+                  $store.isSmartphone ? image.topSmartphone : image.top
                 }px`,
                 left: `${
-                  $store.state.isSmartphone ? image.leftSmartphone : image.left
+                  // $store.state.isSmartphone ? image.leftSmartphone : image.left
+                  $store.isSmartphone ? image.leftSmartphone : image.left
                 }px`,
               }"
             />
@@ -71,7 +74,7 @@
             </delayed-show>
           </div>
         </div>
-      </div>
+      </div> 
     </div>
 
     <other-links />
@@ -91,7 +94,7 @@ import delayedShow from '@/components/atoms/delayedShow'
 import modal from '@/components/organisms/modal'
 import updateMeta from '@/plugins/updateMeta'
 
-export default {
+export default defineNuxtComponent({　
   components: { breadcrumb, otherLinks, labelAnimation, delayedShow, modal },
   data() {
     return {
@@ -256,18 +259,19 @@ export default {
       ],
     }
   },
-  head() {
-    return updateMeta({
-      title: process.env.titleTemplate.replace(/%s/, this.title),
-      url: `${process.env.url}${this.$route.path.slice(1)}`,
+  head({ $config, $updateMeta, _route }) {
+    return $updateMeta({
+      title: $config.public.titleTemplate.replace(/%s/, 'シナプスの特徴'),
+      url: `${$config.public.url}${_route.path.slice(1)}`,
     })
   },
   mounted() {
-    this.fontReload()
+    this.$fontReload()
   },
   methods: {
     showElem(key) {
-      this.$set(this.isShowElem, key, true)
+      // this.$set(this.isShowElem, key, true)
+      this.isShowElem = true;
     },
     stopPropagation($event) {
       $event.stopPropagation()
@@ -276,7 +280,7 @@ export default {
       this.modalDescription = description
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

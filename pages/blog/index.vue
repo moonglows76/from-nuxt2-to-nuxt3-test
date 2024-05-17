@@ -83,23 +83,27 @@ import pagination from '@/components/organisms/pagination'
 import updateMeta from '@/plugins/updateMeta'
 import variables from '@/variables'
 
-export default {
+export default defineNuxtComponent({
   components: { firstview, breadcrumb, otherLinks, articleIndex, pagination },
-  async asyncData({ $axios, route }) {
+  async asyncData({ $config }) {
+    const route = useRoute()
     const pageCurrent = parseInt(route.query.page) || 1
+    const pageMax = await fetch(`${$config.public.apiEndpoint}blog?_embed&page=${pageCurrent}`)
+      .then((response) => {
+        return parseInt(response.headers.get('x-wp-totalpages'))
+      })
+
     const [
       blogRes,
-      { data: latestData },
-      { data: categoryData }
+      latestData,
+      categoryData
     ] = await Promise.all([
-      await $axios.get(
-        `${process.env.apiEndpoint}blog?_embed&page=${pageCurrent}`
-      ),
-      await $axios.get(`${process.env.apiEndpoint}blog?_embed&per_page=5`),
-      await $axios.get(`${process.env.apiEndpoint}categories?per_page=100`)
+      $fetch(`${$config.public.apiEndpoint}blog?_embed&page=${pageCurrent}`),
+      $fetch(`${$config.public.apiEndpoint}blog?_embed&per_page=5`),
+      $fetch(`${$config.public.apiEndpoint}categories?per_page=100`)
     ])
 
-    const data = blogRes.data
+    const data = blogRes
 
     const getContent = (rowDatas) => {
       return rowDatas.map((_data) => {
@@ -122,7 +126,7 @@ export default {
       contents: getContent(data),
       latestContents: getContent(latestData),
       pageCurrent,
-      pageMax: parseInt(blogRes.headers['x-wp-totalpages']),
+      pageMax,
     }
   },
   data() {
@@ -140,20 +144,23 @@ export default {
       ],
     }
   },
-  head() {
-    return updateMeta({
-      title: process.env.titleTemplate.replace(/%s/, this.title),
-      url: `${process.env.url}${this.$route.path.slice(1)}`,
-    })
-  },
   mounted() {
-    this.fontReload()
-    this.$store.commit('updateFirstviewColor', '#FFFFFF')
+    const nuxtApp = useNuxtApp()
+    const config = useRuntimeConfig()
+    const route = useRoute()
+    const headObj = nuxtApp.$updateMeta({
+      title: config.public.titleTemplate.replace(/%s/, this.title),
+      url: `${config.public.url}${route.path.slice(1)}`,
+    })
+    useHead(headObj)
+
+    this.$fontReload()
+    this.$store.updateFirstviewColor('#FFFFFF')
   },
   destroyed() {
-    this.$store.commit('updateFirstviewColor', variables['color-black-1'])
+    this.$store.updateFirstviewColor(variables['color-black-1'])
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

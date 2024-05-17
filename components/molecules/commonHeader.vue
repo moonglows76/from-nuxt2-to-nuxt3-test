@@ -170,7 +170,7 @@ import { gsap } from 'gsap'
 import links from '@/assets/jsons/links'
 import socials from '@/assets/jsons/socials'
 
-export default {
+export default defineComponent({
   data() {
     return {
       tweens: [],
@@ -255,7 +255,7 @@ export default {
       this.isOpen = !this.isOpen
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

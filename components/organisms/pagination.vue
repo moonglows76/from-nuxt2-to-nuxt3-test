@@ -49,7 +49,7 @@
 </template>
 
 <script>
-export default {
+export default defineNuxtComponent({
   props: {
     pageCurrent: {
       type: Number,
@@ -70,10 +70,10 @@ export default {
     }
   },
   async mounted() {
-    await this.sleep(100)
-    this.pageRange = this.$store.state.isSmartphone ? 1 : 2
+    await this.$sleep(100)
+    this.pageRange = this.$store.isSmartphone ? 1 : 2
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

@@ -10,7 +10,7 @@ export default defineNuxtPlugin(() => {
         })
       },
       fontReload() {
-        if (config.public.wpAccessToken || this.$store.fontReloadCount > 0) {
+        if (config.wpAccessToken || this.$store.fontReloadCount > 0) {
           window.FONTPLUS.reload()
         }
         this.$store.incrementFontReloadCount()

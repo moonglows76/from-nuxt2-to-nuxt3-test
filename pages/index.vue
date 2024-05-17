@@ -187,6 +187,7 @@
 </template>
 
 <script>
+// TODO: xml2jsを使える状態であればコメントアウトを外す
 // import { parseString } from 'xml2js'
 import { gsap } from 'gsap'
 import moment from 'moment'
@@ -465,6 +466,7 @@ export default {
 
       const techBlog = techBlogRawData
         ? 
+          // TODO: RSSのデータを読めるまではコメントアウト
           []
           // await new Promise((resolve) => {
           //   parseString(techBlogRawData, (error, result) => {

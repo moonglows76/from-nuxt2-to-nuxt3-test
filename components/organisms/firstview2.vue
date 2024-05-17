@@ -12,12 +12,12 @@
       :style="`background-image: url(${background})`"
     />
     <figure
-      v-if="!background && $store.state.imageSuffix !== null"
+      v-if="!background && $store.imageSuffix !== null"
       class="firstview2__picture-container"
     >
       <img
         class="firstview2__picture"
-        :src="`/images/index/firstview_illust${$store.state.imageSuffix}.jpg`"
+        :src="`/images/index/firstview_illust${$store.imageSuffix}.jpg`"
         alt=""
       />
     </figure>
@@ -51,7 +51,7 @@
 <script>
 import labelAnimation from '@/components/atoms/labelAnimation'
 
-export default {
+export default defineNuxtComponent({
   components: { labelAnimation },
   props: {
     isLarge: {
@@ -85,7 +85,7 @@ export default {
       },
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

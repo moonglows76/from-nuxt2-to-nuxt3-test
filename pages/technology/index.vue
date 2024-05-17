@@ -22,17 +22,17 @@ import otherLinks from '@/components/molecules/otherLinks'
 import pageIndex from '@/components/organisms/pageIndex'
 import updateMeta from '@/plugins/updateMeta'
 
-export default {
+export default defineNuxtComponent({
   components: {
     firstview,
     breadcrumb,
     otherLinks,
     pageIndex,
   },
-  asyncData({ route }) {
+  asyncData({ _route }) {
     return {
       contents: links.find((link) => {
-        return link.path.replace(/\/$/, '') === route.path.replace(/\/$/, '')
+        return link.path.replace(/\/$/, '') === _route.path.replace(/\/$/, '')
       })?.children,
     }
   },
@@ -51,16 +51,16 @@ export default {
       ],
     }
   },
-  head() {
-    return updateMeta({
-      title: process.env.titleTemplate.replace(/%s/, this.title),
-      url: `${process.env.url}${this.$route.path.slice(1)}`,
+  head({ $config, $updateMeta, _route }) {
+    return $updateMeta({
+      title: $config.public.titleTemplate.replace(/%s/, 'シナプスの技術'),
+      url: `${$config.public.url}${_route.path.slice(1)}`,
     })
   },
   mounted() {
-    this.fontReload()
+    this.$fontReload()
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

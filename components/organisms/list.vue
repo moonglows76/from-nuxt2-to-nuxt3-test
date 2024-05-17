@@ -10,7 +10,7 @@
 </template>
 
 <script>
-export default {
+export default defineNuxtComponent({
   props: {
     lists: {
       type: Array,
@@ -19,7 +19,7 @@ export default {
       },
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

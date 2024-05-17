@@ -14,7 +14,7 @@
 </template>
 
 <script>
-export default {
+export default defineNuxtComponent({
   props: {
     description: {
       type: String,
@@ -23,10 +23,10 @@ export default {
   },
   watch: {
     description(val) {
-      this.$store.commit('updateIsOpenModal', !!val)
+      this.$store.updateIsOpenModal(!!val)
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

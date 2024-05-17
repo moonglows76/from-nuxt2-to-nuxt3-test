@@ -4,22 +4,22 @@
       <div class="firstview__picture-container">
         <div
           v-for="(firstviewPicture, index) in firstviewPictures"
-          v-show="!($store.state.isSmartphone && firstviewPicture.onlyPc)"
+          v-show="!($store.isSmartphone && firstviewPicture.onlyPc)"
           ref="firstview-picture"
           :key="index"
           :style="{
             backgroundImage: `url(${firstviewPicture.src})`,
             marginLeft: `${
-              firstviewPicture.x * ($store.state.isSmartphone ? 0.25 : 1)
+              firstviewPicture.x * ($store.isSmartphone ? 0.25 : 1)
             }px`,
             marginTop: `${
-              firstviewPicture.y * ($store.state.isSmartphone ? 0.5 : 1)
+              firstviewPicture.y * ($store.isSmartphone ? 0.5 : 1)
             }px`,
             width: `${
-              firstviewPicture.width * ($store.state.isSmartphone ? 0.35 : 1)
+              firstviewPicture.width * ($store.isSmartphone ? 0.35 : 1)
             }px`,
             height: `${
-              firstviewPicture.height * ($store.state.isSmartphone ? 0.35 : 1)
+              firstviewPicture.height * ($store.isSmartphone ? 0.35 : 1)
             }px`,
           }"
           class="firstview-picture"
@@ -29,19 +29,19 @@
       <div class="firstview__illust-container">
         <img
           v-for="(firstviewIllust, index) in firstviewIllusts"
-          v-show="!($store.state.isSmartphone && firstviewIllust.onlyPc)"
+          v-show="!($store.isSmartphone && firstviewIllust.onlyPc)"
           ref="firstview-illust"
           :key="index"
           :src="firstviewIllust.src"
           :style="{
             marginLeft: `${
-              firstviewIllust.x * ($store.state.isSmartphone ? 0.35 : 1)
+              firstviewIllust.x * ($store.isSmartphone ? 0.35 : 1)
             }px`,
             marginTop: `${
-              firstviewIllust.y * ($store.state.isSmartphone ? 0.4 : 1)
+              firstviewIllust.y * ($store.isSmartphone ? 0.4 : 1)
             }px`,
             width: `${
-              firstviewIllust.width * ($store.state.isSmartphone ? 0.35 : 1)
+              firstviewIllust.width * ($store.isSmartphone ? 0.35 : 1)
             }px`,
           }"
           class="firstview-illust"
@@ -68,7 +68,7 @@
         <delayed-show
           v-for="(outline, index) in outlines"
           :key="index"
-          :delay="$store.state.isSmartphone ? 0 : 0.2 * index"
+          :delay="$store.isSmartphone ? 0 : 0.2 * index"
           class="outline"
           @click="goWork(index)"
         >
@@ -127,7 +127,7 @@
           <delayed-show
             v-for="(job, jobIndex) in work.jobs"
             :key="jobIndex"
-            :delay="$store.state.isSmartphone ? 0 : 0.2 * (jobIndex % 2)"
+            :delay="$store.isSmartphone ? 0 : 0.2 * (jobIndex % 2)"
             class="work-job"
           >
             <p class="work-job__title">
@@ -159,7 +159,7 @@ import delayedShow from '@/components/atoms/delayedShow'
 import labelAnimation from '@/components/atoms/labelAnimation'
 import updateMeta from '@/plugins/updateMeta'
 
-export default {
+export default defineNuxtComponent({
   components: {
     breadcrumb,
     commonButton,
@@ -397,16 +397,16 @@ export default {
       ],
     }
   },
-  head() {
-    return updateMeta({
-      title: process.env.titleTemplate.replace(/%s/, this.title),
-      url: `${process.env.url}${this.$route.path.slice(1)}`,
+  head({ $config, $updateMeta, _route }) {
+    return $updateMeta({
+      title: $config.public.titleTemplate.replace(/%s/, '広報・企画'),
+      url: `${$config.public.url}${_route.path.slice(1)}`,
     })
   },
   mounted() {
-    this.fontReload()
+    this.$fontReload()
 
-    this.animateFirstview()
+    this.$animateFirstview()
   },
   destroyed() {
     this.timelines.forEach((timeline) => {
@@ -443,7 +443,7 @@ export default {
       })
     },
     showElem(key) {
-      this.$set(this.isShowElem, key, true)
+      this.isShowElem(true)
     },
     goWork(index) {
       scroll.top(
@@ -455,7 +455,7 @@ export default {
       )
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

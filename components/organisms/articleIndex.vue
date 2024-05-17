@@ -46,7 +46,7 @@
 </template>
 
 <script>
-export default {
+export default defineNuxtComponent({
   props: {
     title: {
       type: String,
@@ -67,7 +67,7 @@ export default {
       default: false,
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

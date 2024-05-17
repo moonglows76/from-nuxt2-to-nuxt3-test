@@ -15,7 +15,7 @@
 </template>
 
 <script>
-export default {
+export default defineNuxtComponent({　
   props: {
     tabs: {
       type: Array,
@@ -32,7 +32,7 @@ export default {
       default: '',
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

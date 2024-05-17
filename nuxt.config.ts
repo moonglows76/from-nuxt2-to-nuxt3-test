@@ -112,6 +112,7 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
+    wpAccessToken,
     public: {
       url,
       titleTemplate: `%s - ${title}`,

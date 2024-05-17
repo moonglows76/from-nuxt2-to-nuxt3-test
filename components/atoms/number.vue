@@ -23,7 +23,7 @@
 <script>
 import { gsap, Power0 } from 'gsap'
 
-export default {
+export default defineNuxtComponent({
   props: {
     number: {
       type: Number,
@@ -52,8 +52,8 @@ export default {
     this.decimalLength = this.getDecimalLength(this.number)
     window.addEventListener('scroll', this.checkStart)
 
-    await this.sleep(500)
-    this.checkStart()
+    await this.$sleep(500)
+    this.$checkStart()
   },
   destroyed() {
     window.removeEventListener('scroll', this.checkStart)
@@ -83,7 +83,7 @@ export default {
       }
     },
     async start() {
-      await this.sleep(this.delay * 1000)
+      await this.$sleep(this.delay * 1000)
       const dummyNumber = {
         number: this.currentNumber,
       }
@@ -105,7 +105,7 @@ export default {
       })
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">
