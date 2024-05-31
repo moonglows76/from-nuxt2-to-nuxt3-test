@@ -24,7 +24,7 @@
 <script>
 import variables from '~/variables'
 
-export default {
+export default defineNuxtComponent({
   data() {
     return {
       bodyScale: 'none',
@@ -81,7 +81,7 @@ export default {
       )
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

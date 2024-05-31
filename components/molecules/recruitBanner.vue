@@ -28,9 +28,9 @@
 import delayedShow from '@/components/atoms/delayedShow'
 import commonButton from '@/components/atoms/commonButton'
 
-export default {
+export default defineNuxtComponent({　　
   components: { commonButton, delayedShow },
-}
+})
 </script>
 
 <style scoped lang="scss">

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-export default defineNuxtComponent({　
+export default defineNuxtComponent({
   props: {
     tabs: {
       type: Array,

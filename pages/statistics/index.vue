@@ -15,7 +15,7 @@
           {{ question.text }}
         </p>
       </div>
-      <figure>
+      <!-- <figure>
         <img
           v-for="(firstviewIllust, index) in firstviewIllusts"
           v-show="$store.
@@ -34,7 +34,7 @@
             marginTop: `${getFirstviewIllustSize(index).y}px`,
           }"
         />
-      </figure>
+      </figure> -->
       <p class="firstview__title-en">Statistics</p>
       <h1 class="firstview__title" v-html="title" />
       <p class="firstview__description" />
@@ -61,7 +61,7 @@
                 'content-statistics--show-comment': statistics.showComment,
               }"
             >
-              <figure class="content-statistics__image-container">
+              <!-- <figure class="content-statistics__image-container">
                 <img
                   v-if="
                     statisticsIndex === content.statistics.length - 1 &&
@@ -92,13 +92,13 @@
                     />
                   </delayed-show>
                 </div>
-              </figure>
+              </figure> -->
               <p class="content-statistics__title" v-html="statistics.title" />
               <p
                 class="content-statistics__comment"
                 v-html="statistics.comment"
               />
-              <div class="content-statistics__number-container">
+              <!-- <div class="content-statistics__number-container">
                 <number
                   v-for="(number, numberIndex) in statistics.numbers"
                   :key="numberIndex"
@@ -113,7 +113,7 @@
                   "
                   @finish="showComment(statistics)"
                 />
-              </div>
+              </div> -->
               <p
                 class="content-statistics__link"
                 @click="updateModalDescription(statistics.description)"
@@ -504,7 +504,7 @@ export default defineNuxtComponent({
   },
   async mounted() {
     await this.$sleep(50)
-    this.$resetQuestions()
+    this.resetQuestions()
 
     if (!this.$store.isSmartphone) {
       window.addEventListener('resize', this.resetQuestions)
@@ -524,8 +524,8 @@ export default defineNuxtComponent({
       this.isPreventResetQuestions = true
       this.questionTimeline && this.questionTimeline.kill()
       await this.setQuestions()
-      this.fontReload()
-      await this.sleep(1000)
+      this.$fontReload()
+      await this.$sleep(1000)
       await this.showQuestions()
       this.animateQuestions()
       this.isPreventResetQuestions = false
@@ -598,9 +598,10 @@ export default defineNuxtComponent({
         this.$refs.firstview.clientHeight / questionHeight
       )
 
-      this.$set(this, 'questions', [])
+      // this.$set(this, 'questions', [])
+      this.questions = []
 
-      await this.sleep(50)
+      await this.$sleep(50)
 
       const rowOffset = []
 
@@ -614,7 +615,16 @@ export default defineNuxtComponent({
               (Math.random() - 0.5) * this.questionOffsetWidth
           }
 
-          this.$set(this.questions, index, {
+          // this.$set(this.questions, index, {
+          //   text: this.questionTexts[index % this.questionTexts.length],
+          //   x: rowIndex * questionWidth + rowOffset[columnIndex],
+          //   y:
+          //     columnIndex * questionHeight +
+          //     (Math.random() - 0.5) *
+          //       (this.$store.isSmartphone ? 20 : 40),
+          //   diffX: 0,
+          // })
+          this.questions[index] = {
             text: this.questionTexts[index % this.questionTexts.length],
             x: rowIndex * questionWidth + rowOffset[columnIndex],
             y:
@@ -622,17 +632,20 @@ export default defineNuxtComponent({
               (Math.random() - 0.5) *
                 (this.$store.isSmartphone ? 20 : 40),
             diffX: 0,
-          })
+          }
         })
     },
     updateIsShowStatistics(index, statisticsIndex) {
       if (!this.isShowStatistics[index]) {
-        this.$set(this.isShowStatistics, index, [])
+        // this.$set(this.isShowStatistics, index, [])
+        this.isShowStatistics[index] = []
       }
-      this.$set(this.isShowStatistics[index], statisticsIndex, true)
+      // this.$set(this.isShowStatistics[index], statisticsIndex, true)
+      this.isShowStatistics[index][statisticsIndex] = true
     },
     showComment(statistics) {
-      this.$set(statistics, 'showComment', true)
+      // this.$set(statistics, 'showComment', true)
+      statistics.showComment = true
     },
     getFirstviewIllustSize(index) {
       const device = this.$store.isSmartphone ? 'smartphone' : 'pc'

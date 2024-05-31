@@ -3,19 +3,19 @@
     <section class="firstview">
       <div class="firstview__box">
         <figure
-          v-if="$store.state.imageSuffix !== null"
+          v-if="$store.imageSuffix !== null && firstviewCharas"
           class="firstview__picture-container"
         >
           <img
             class="firstview__picture"
-            :src="`/images/index/firstview_illust${$store.state.imageSuffix}.jpg`"
+            :src="`/images/index/firstview_illust${$store.imageSuffix}.jpg`"
             alt=""
           />
           <img
             v-for="(firstviewChara, index) in firstviewCharas"
             v-show="firstviewChara.width && isFirstviewIllustLoaded"
             :key="index"
-            :src="require(`~/assets/images/index/chara_${index + 1}.png`)"
+            :src="firstviewImgs[`chara_${index + 1}`]"
             alt=""
             class="firstview__chara"
             :style="{
@@ -123,7 +123,6 @@
       <div class="work-container__box">
         <p class="work-container__title-en">Work</p>
         <p class="work-container__title">シナプスの仕事と人</p>
-
         <div>
           <div v-for="(work, index) in works" :key="index" class="work">
             <delayed-show
@@ -187,15 +186,14 @@
 </template>
 
 <script>
-// TODO: xml2jsを使える状態であればコメントアウトを外す
-// import { parseString } from 'xml2js'
 import { gsap } from 'gsap'
 import moment from 'moment'
 import commonButton from '@/components/atoms/commonButton'
 import recruitBanner from '@/components/molecules/recruitBanner'
 import delayedShow from '@/components/atoms/delayedShow'
+import { filename } from 'pathe/utils';
 
-export default {
+export default defineNuxtComponent({
   components: { commonButton, recruitBanner, delayedShow },
   data() {
     return {
@@ -397,16 +395,17 @@ export default {
           ],
         },
       ],
+      firstviewImgs: {},
     }
   },
   async mounted() {
-    await this.sleep(200)
-    this.firstviewRatio = this.$store.state.isSmartphone ? 0.353 : 1
+    await this.$sleep(200)
+    this.firstviewRatio = this.$store.isSmartphone ? 0.353 : 1
     this.fetchFirstviewNews()
     this.loadFirstviewCharas()
     this.loadFirstviewIllust()
     this.animateFirstviewCharas()
-    this.fontReload()
+    this.$fontReload()
   },
   destroyed() {
     this.firstviewCharaTimelines.forEach((firstviewCharaTimeline) => {
@@ -415,31 +414,35 @@ export default {
   },
   methods: {
     async fetchFirstviewNews() {
+      const config = useRuntimeConfig()
       const [
-        { data: news },
-        { data: blog },
-        { data: discussion },
-        { data: staffBlog },
+        news,
+        blog,
+        discussion,
+        staffBlog,
         { data: techBlogRawData },
       ] = await Promise.all(
         [
-          this.$axios.get(`${process.env.apiEndpoint}news?_embed&per_page=5`),
-          this.$axios.get(`${process.env.apiEndpoint}blog?_embed&per_page=5`),
-          this.$axios.get(
-            `${process.env.apiEndpoint}discussion?_embed&per_page=5`
+          $fetch(`${config.public.apiEndpoint}news?_embed&per_page=5`),
+          $fetch(`${config.public.apiEndpoint}blog?_embed&per_page=5`),
+          $fetch(
+            `${config.public.apiEndpoint}discussion?_embed&per_page=5`
           ),
-          this.$axios.get(
-            `${process.env.apiEndpoint}staff_blog?_embed&per_page=5`
+          $fetch(
+            `${config.public.apiEndpoint}staff_blog?_embed&per_page=5`
           ),
-        ].concat(
-          process.env.wpAccessToken
+        ]
+        .concat(
+          config.wpAccessToken
             ? new Promise((resolve) => {
                 resolve({
                   data: null,
                 })
               })
-            : this.$axios.post(`${process.env.url}api/fetchRSS`, {
-                url: 'https://tech.synapse.jp/rss',
+            : await useFetch(`${config.public.url}api/fetchRSS`, {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: { url: 'https://tech.synapse.jp/rss' }
               })
         )
       )
@@ -464,19 +467,16 @@ export default {
         _staffBlog.basePath = '/staff-blog/'
       })
 
-      const techBlog = techBlogRawData
-        ? 
-          // TODO: RSSのデータを読めるまではコメントアウト
-          []
-          // await new Promise((resolve) => {
-          //   parseString(techBlogRawData, (error, result) => {
-          //     if (error) {
-          //       console.log(error)
-          //     }
-          //     resolve(result?.rss?.channel?.[0]?.item)
-          //   })
-          // })
-        : []
+      const techBlog = techBlogRawData.value.data
+      //   ? await new Promise((resolve) => {
+      //       parseString(techBlogRawData, (error, result) => {
+      //         if (error) {
+      //           console.log(error)
+      //         }
+      //         resolve(result?.rss?.channel?.[0]?.item)
+      //       })
+      //     })
+      //   : []
 
       techBlog.forEach((_techBlog) => {
         _techBlog.category = '技術者ブログ'
@@ -495,14 +495,14 @@ export default {
           return {
             category: _firstviewNews.category,
             date: moment(
-              isExternal ? _firstviewNews.pubDate?.[0] : _firstviewNews.date
+              isExternal ? _firstviewNews.pubDate : _firstviewNews.date
             ).format('YYYY.MM.DD'),
             title: isExternal
-              ? _firstviewNews.title?.[0]
+              ? _firstviewNews.title
               : _firstviewNews.title.rendered.replace(/<br>/g, ''),
             basePath: _firstviewNews.basePath,
             link: isExternal
-              ? _firstviewNews.link?.[0]
+              ? _firstviewNews.link
               : `${_firstviewNews.basePath}${_firstviewNews.slug}/`,
             isExternal,
           }
@@ -515,11 +515,11 @@ export default {
         })
         .slice(0, maxLength)
 
-      this.$set(this, 'firstviewNews', firstviewNews)
+      this.firstviewNews = firstviewNews
     },
     async loadFirstviewIllust() {
       const image = new Image()
-      image.src = `/images/index/firstview_illust${this.$store.state.imageSuffix}.jpg`
+      image.src = `/images/index/firstview_illust${this.$store.imageSuffix}.jpg`
 
       await new Promise((resolve) => {
         image.complete ? resolve() : (image.onload = resolve)
@@ -529,7 +529,7 @@ export default {
     },
     animateFirstviewCharas() {
       this.firstviewCharas.forEach((firstviewChara, index) => {
-        this.$set(this.firstviewCharas[index], 'isShow', false)
+        this.firstviewCharas[index].isShow = false
         const duration = 1.5 + Math.random() * 1.5
         const params = { val: 0 }
 
@@ -540,34 +540,44 @@ export default {
               duration,
               val: 1,
               onComplete: () => {
-                this.$set(this.firstviewCharas[index], 'isShow', true)
+                this.firstviewCharas[index].isShow = true
               },
             })
             .to(params, {
               duration,
               val: 9,
               onComplete: () => {
-                this.$set(this.firstviewCharas[index], 'isShow', false)
+                this.firstviewCharas[index].isShow = false
               },
             })
         )
       })
     },
     loadFirstviewCharas() {
-      this.firstviewCharas.forEach(async (firstviewChara, index) => {
-        const image = new Image()
-        image.src = require(`~/assets/images/index/chara_${index + 1}.png`)
-        await new Promise((resolve) => {
-          image.complete ? resolve() : (image.onload = resolve)
+      // ファイルパスを取得
+      const glob = import.meta.glob('~/assets/images/index/*.png', { eager: true });
+      // 画像ファイルを1つずつチェック
+      const images = Object.fromEntries(
+        Object.entries(glob).map(([key, value]) => {
+          // 画像情報をImageオブジェクトで取得
+          const img = new Image();
+          img.src = value.default;
+          // 画像情報を取得できたら、ファイル名の数字を変数indexに格納＆幅をfirstviewCharasに追加
+          img.onload = () => {
+            const index = value.default.replace(/\/_nuxt\/assets\/images\/index\/chara_(\d+).png/g, "$1")
+            this.firstviewCharas[index - 1].width = img.width
+          };
+          return [filename(key), value.default]
         })
-        this.$set(this.firstviewCharas[index], 'width', image.width)
-      })
+      );
+      this.firstviewImgs = images
+
     },
     showElem(key) {
-      this.$set(this.isShowElem, key, true)
+      this.isShowElem[key] = true
     },
   },
-}
+})
 </script>
 
 <style scoped lang="scss">
@@ -1050,7 +1060,7 @@ export default {
       bottom: 0;
       left: 0;
       background-size: 100% 100%;
-      background-image: url('~assets/images/common/circle_frame.png');
+      background-image: url('~/assets/images/common/circle_frame.png');
       content: '';
     }
   }

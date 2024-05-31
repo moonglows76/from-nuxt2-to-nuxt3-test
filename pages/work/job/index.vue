@@ -169,6 +169,7 @@ export default defineNuxtComponent({
   },
   data() {
     return {
+      title: '職種紹介',
       breadcrumbContents: [
         {
           title: 'ホーム',
@@ -397,16 +398,18 @@ export default defineNuxtComponent({
       ],
     }
   },
-  head({ $config, $updateMeta, _route }) {
-    return $updateMeta({
-      title: $config.public.titleTemplate.replace(/%s/, '広報・企画'),
-      url: `${$config.public.url}${_route.path.slice(1)}`,
-    })
-  },
   mounted() {
+    const nuxtApp = useNuxtApp()
+    const config = useRuntimeConfig()
+    const route = useRoute()
+    const headObj = nuxtApp.$updateMeta({
+      title: config.public.titleTemplate.replace(/%s/, this.title),
+      url: `${config.public.url}${route.path.slice(1)}`,
+    })
+    useHead(headObj)
     this.$fontReload()
 
-    this.$animateFirstview()
+    this.animateFirstview()
   },
   destroyed() {
     this.timelines.forEach((timeline) => {

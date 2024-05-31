@@ -35,6 +35,7 @@ export default defineNuxtComponent({　
   },
   data() {
     return {
+      title: 'シナプスの技術力',
       breadcrumbContents: [
         {
           title: 'ホーム',
@@ -154,13 +155,15 @@ IP-PBXをクラウド上で提供するビジネス系の光電話サービス�
       `,
     }
   },
-  head({ $config, $updateMeta, _route }) {
-    return $updateMeta({
-      title: $config.public.titleTemplate.replace(/%s/, 'シナプスの技術力'),
-      url: `${$config.public.url}${_route.path.slice(1)}`,
-    })
-  },
   mounted() {
+    const nuxtApp = useNuxtApp()
+    const config = useRuntimeConfig()
+    const route = useRoute()
+    const headObj = nuxtApp.$updateMeta({
+      title: config.public.titleTemplate.replace(/%s/, this.title),
+      url: `${config.public.url}${route.path.slice(1)}`,
+    })
+    useHead(headObj)
     this.$store.updateFirstviewColor('#FFFFFF')
     this.$fontReload()
   },
